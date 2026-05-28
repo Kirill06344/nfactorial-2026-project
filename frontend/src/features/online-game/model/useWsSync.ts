@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useGameStore } from "@/app/store/game.store";
 import { wsClient } from "@/shared/api/ws-client";
+import type { Board } from "@/shared/types";
 
 export function useWsSync() {
   const { mode, roomId, setStatus, setYourPlayer, applyState } = useGameStore();
@@ -16,7 +17,7 @@ export function useWsSync() {
         setStatus("waiting");
       },
       onState(board, currentPlayer, winner, finished) {
-        applyState(board, currentPlayer, winner, finished);
+        applyState(board as Board, currentPlayer, winner, finished);
       },
       onOpponentLeft() {
         // Сброс до waiting — ждём нового соперника

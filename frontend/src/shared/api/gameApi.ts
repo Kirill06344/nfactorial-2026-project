@@ -1,3 +1,5 @@
+import type { Board } from "@/shared/types";
+
 const BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8080";
 
 export interface BotMoveResponse {
@@ -7,9 +9,6 @@ export interface BotMoveResponse {
   finished: boolean;
   botColumn: number;
 }
-
-// Import Board type — или дублируй если нет алиаса
-type Board = number[][];
 
 export const gameApi = {
   newGame: async (): Promise<{ board: Board; currentPlayer: 1 | 2 }> => {
